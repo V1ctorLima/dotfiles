@@ -3,7 +3,7 @@
 [user]
   name = Victor Lima
   email = me@vlima.in
-  signingkey = 
+  signingkey = 83A35527AE43FBB7
 
 [gpg]
   program = /usr/local/bin/gpg
