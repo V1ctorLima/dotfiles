@@ -269,9 +269,10 @@ Aliases are organized by platform:
 
 ### Common Issues
 
-**Prompt showing weird characters?**
-- Install a [Nerd Font](https://www.nerdfonts.com/) in your terminal
-- Or use the Docker environment which auto-switches to ASCII-safe mode
+**Prompt showing weird characters or boxes?**
+- **Run the setup script**: `./setup.sh` automatically installs JetBrains Mono Nerd Font
+- **Manual install**: Download from [Nerd Fonts](https://www.nerdfonts.com/) 
+- **Configure terminal**: Set font to "JetBrains Mono Nerd Font" and restart terminal
 
 **ZSH not found?**
 - Install ZSH: `brew install zsh` (macOS) or `sudo apt install zsh` (Linux)

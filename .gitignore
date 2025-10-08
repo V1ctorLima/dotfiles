@@ -12,7 +12,6 @@
 !.config/git/config
 !.config/inputrc
 !.config/oh-my-posh/chippuccin.toml
-!.config/oh-my-posh/chippuccin-docker.toml
 !.config/oh-my-posh/README.md
 !.config/termux/termux.properties
 !.config/tmux/tmux.conf
@@ -27,11 +26,6 @@
 !.zshenv
 !LICENSE
 !README.md
-!Dockerfile
-!docker-compose.yml
-!test-dotfiles.sh
 !Makefile
-!README-Docker-Testing.md
 !.stow-local-ignore
-!interactive-welcome.sh
 !setup.sh

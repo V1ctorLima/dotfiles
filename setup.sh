@@ -242,6 +242,85 @@ install_modern_tools() {
     esac
 }
 
+# Install Nerd Fonts for proper Oh My Posh rendering
+install_nerd_fonts() {
+    print_status "Installing Nerd Fonts for proper terminal rendering..."
+    
+    case $OS in
+        "macos")
+            # Use Homebrew to install Nerd Fonts
+            if command -v brew >/dev/null 2>&1; then
+                print_status "Installing JetBrains Mono Nerd Font via Homebrew..."
+                brew tap homebrew/cask-fonts 2>/dev/null || true
+                brew install --cask font-jetbrains-mono-nerd-font 2>/dev/null || true
+                print_success "Nerd Font installed via Homebrew"
+            else
+                print_warning "Homebrew not found, skipping font installation"
+            fi
+            ;;
+        "ubuntu"|"linux")
+            # Download and install Nerd Fonts manually
+            FONT_DIR="$HOME/.local/share/fonts"
+            mkdir -p "$FONT_DIR"
+            
+            if [ ! -f "$FONT_DIR/JetBrainsMonoNerdFont-Regular.ttf" ]; then
+                print_status "Downloading JetBrains Mono Nerd Font..."
+                FONT_URL="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/JetBrainsMono.zip"
+                TEMP_DIR=$(mktemp -d)
+                
+                if command -v wget >/dev/null 2>&1; then
+                    wget -q "$FONT_URL" -O "$TEMP_DIR/JetBrainsMono.zip"
+                elif command -v curl >/dev/null 2>&1; then
+                    curl -sL "$FONT_URL" -o "$TEMP_DIR/JetBrainsMono.zip"
+                else
+                    print_error "Neither wget nor curl found. Cannot download fonts."
+                    return 1
+                fi
+                
+                if command -v unzip >/dev/null 2>&1; then
+                    unzip -q "$TEMP_DIR/JetBrainsMono.zip" -d "$TEMP_DIR"
+                    cp "$TEMP_DIR"/*.ttf "$FONT_DIR/" 2>/dev/null || true
+                    
+                    # Update font cache
+                    if command -v fc-cache >/dev/null 2>&1; then
+                        fc-cache -fv "$FONT_DIR" >/dev/null 2>&1
+                    fi
+                    
+                    rm -rf "$TEMP_DIR"
+                    print_success "JetBrains Mono Nerd Font installed"
+                else
+                    print_error "unzip not found. Cannot extract fonts."
+                    rm -rf "$TEMP_DIR"
+                    return 1
+                fi
+            else
+                print_success "JetBrains Mono Nerd Font already installed"
+            fi
+            ;;
+        "arch")
+            # Use pacman to install Nerd Fonts
+            print_status "Installing Nerd Fonts via pacman..."
+            sudo pacman -S --noconfirm ttf-jetbrains-mono-nerd 2>/dev/null || true
+            print_success "Nerd Font installed via pacman"
+            ;;
+        "fedora")
+            # Use dnf to install Nerd Fonts
+            print_status "Installing Nerd Fonts via dnf..."
+            sudo dnf install -y jetbrains-mono-fonts-all 2>/dev/null || true
+            print_success "Nerd Font installed via dnf"
+            ;;
+        *)
+            print_warning "Unknown OS. Please manually install a Nerd Font from https://www.nerdfonts.com/"
+            print_status "Recommended: JetBrains Mono Nerd Font"
+            ;;
+    esac
+    
+    print_status "📝 Important: You may need to:"
+    print_status "   1. Restart your terminal application"
+    print_status "   2. Set your terminal font to 'JetBrains Mono Nerd Font'"
+    print_status "   3. Ensure font size is readable (12-14pt recommended)"
+}
+
 # Create required directories
 create_directories() {
     print_status "Creating required directories..."
@@ -346,6 +425,9 @@ main() {
     echo ""
     
     install_modern_tools
+    echo ""
+    
+    install_nerd_fonts
     echo ""
     
     create_directories

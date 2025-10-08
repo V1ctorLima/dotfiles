@@ -1,31 +1,14 @@
 # Oh My Posh Configuration
 
-This directory contains Oh My Posh prompt configurations for different environments.
+This directory contains Oh My Posh prompt configuration with a beautiful Catppuccin theme.
 
 ## Files
 
 ### `chippuccin.toml`
-- **Full-featured config** with Nerd Font icons
+- **Catppuccin-themed config** with Nerd Font icons
 - **Best for**: Desktop terminals with proper font support
 - **Requires**: Nerd Font installed (e.g., FiraCode Nerd Font, JetBrains Mono Nerd Font)
-
-### `chippuccin-docker.toml`
-- **Docker/Terminal-friendly** version without Nerd Font icons
-- **Best for**: Docker containers, basic terminals, SSH sessions
-- **Uses**: ASCII-safe characters only (`/`, `*`, `^`, `v`, `>`, etc.)
-
-## Automatic Detection
-
-The ZSH configuration automatically detects your environment:
-
-```bash
-# Docker containers or basic terminals
-if [ -f /.dockerenv ] || [ "$CONTAINER" = "docker" ] || [ "$TERM" = "linux" ]; then
-    # Uses chippuccin-docker.toml (no Nerd Font icons)
-else
-    # Uses chippuccin.toml (full Nerd Font icons)
-fi
-```
+- **Features**: Custom symbols for success/error states and git branches
 
 ## Custom Symbols & Icon Replacements
 
@@ -48,25 +31,57 @@ fi
 | Error Prompt | `✗` | `✗` |
 | Git Branch | `🌱` | `🌱` |
 
+## Font Installation
+
+### Automatic Installation
+The `setup.sh` script automatically installs JetBrains Mono Nerd Font:
+```bash
+./setup.sh
+```
+
+### Manual Installation
+
+**macOS (with Homebrew):**
+```bash
+brew tap homebrew/cask-fonts
+brew install --cask font-jetbrains-mono-nerd-font
+```
+
+**Ubuntu/Debian:**
+```bash
+mkdir -p ~/.local/share/fonts
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/JetBrainsMono.zip
+unzip JetBrainsMono.zip -d ~/.local/share/fonts
+fc-cache -fv ~/.local/share/fonts
+```
+
+**Arch Linux:**
+```bash
+sudo pacman -S ttf-jetbrains-mono-nerd
+```
+
+### Terminal Configuration
+After installing the font:
+1. **Restart your terminal application**
+2. **Set terminal font to "JetBrains Mono Nerd Font"**
+3. **Set font size to 12-14pt for best readability**
+
 ## Troubleshooting
 
-### Seeing weird characters like `󰟀󰿟`?
-- You're probably using a terminal without Nerd Font support
-- The Docker-friendly config should auto-detect and fix this
-- If not, manually use: `oh-my-posh init zsh --config ~/.config/oh-my-posh/chippuccin-docker.toml`
+### Seeing weird characters or boxes?
+- **Install Nerd Font**: Run `./setup.sh` or manually install JetBrains Mono Nerd Font
+- **Configure Terminal**: Set your terminal font to "JetBrains Mono Nerd Font"
+- **Restart Terminal**: Font changes require terminal restart
 
 ### Oh My Posh not working at all?
 - Check if it's installed: `which oh-my-posh`
 - The ZSH config will fallback to a simple colored prompt if Oh My Posh is missing
+- Run `./setup.sh` to install all dependencies
 
-### Want to force a specific config?
-```bash
-# Force Docker-friendly config
-eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/chippuccin-docker.toml)"
-
-# Force full Nerd Font config
-eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/chippuccin.toml)"
-```
+### VMware/Virtual Machine Issues?
+- Ensure Nerd Font is installed in the VM (not just host)
+- Configure the VM's terminal emulator font settings
+- Some VM terminal emulators may need specific font configuration
 
 ## Color Scheme
 

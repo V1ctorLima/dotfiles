@@ -55,14 +55,8 @@ export PROMPT='%n%F{245}@%f%B%M%b%F{245}:%20<..<%3~%<<%f%B%#%b '
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
   # Check if oh-my-posh is available
   if command -v oh-my-posh >/dev/null 2>&1; then
-    # Detect if we're in a Docker container or terminal without Nerd Font support
-    if [ -f /.dockerenv ] || [ "$CONTAINER" = "docker" ] || [ "$TERM" = "linux" ]; then
-      # Use Docker-friendly config without Nerd Font icons
-      eval "$(oh-my-posh init zsh --config "$HOME/.config/oh-my-posh/chippuccin-docker.toml")" 2>/dev/null || true
-    else
-      # Use full config with Nerd Font icons
-      eval "$(oh-my-posh init zsh --config "$HOME/.config/oh-my-posh/chippuccin.toml")" 2>/dev/null || true
-    fi
+    # Use Oh My Posh with Catppuccin theme
+    eval "$(oh-my-posh init zsh --config "$HOME/.config/oh-my-posh/chippuccin.toml")" 2>/dev/null || true
   else
     # Fallback to a nice ZSH prompt if oh-my-posh is not available
     export PROMPT='%F{cyan}%n%f%F{245}@%f%F{green}%M%f%F{245}:%f%F{blue}%~%f %F{yellow}❯%f '
