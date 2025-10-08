@@ -241,14 +241,15 @@ Useful shell functions and aliases included:
 
 ## Customization
 
-### Oh My Posh Themes
+### Oh My Posh Theme
 
-Two prompt configurations are available:
+The custom **Catppuccin** themed prompt configuration with Nerd Font support:
 
-- **`chippuccin.toml`**: Full Nerd Font version with icons
-- **`chippuccin-ascii.toml`**: ASCII-safe version for Docker/SSH/Cloud terminals
+- **`chippuccin.toml`**: Beautiful prompt with powerline separators, git integration, and custom icons
+- Displays AWS region, path, git status, language versions, and execution time
+- Color-coded git status (green=clean, yellow=modified, red=behind/ahead)
 
-The configuration automatically detects your environment and switches accordingly. You can also manually force ASCII mode by setting the `OH_MY_POSH_ASCII` environment variable.
+**Requirements:** JetBrains Mono Nerd Font (automatically installed by `setup.sh`)
 
 ### Platform-Specific Aliases
 

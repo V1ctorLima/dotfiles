@@ -346,6 +346,45 @@ install_nerd_fonts() {
     print_status "   3. Ensure font size is readable (12-14pt recommended)"
 }
 
+# Configure terminal applications to use Nerd Fonts
+configure_terminal_fonts() {
+    if [ "$OS" = "macos" ]; then
+        print_status "Configuring macOS terminal applications to use Nerd Fonts..."
+        
+        # Configure iTerm2 if installed
+        if [ -f "$HOME/Library/Preferences/com.googlecode.iterm2.plist" ]; then
+            print_status "Configuring iTerm2..."
+            /usr/libexec/PlistBuddy -c "Set :'New Bookmarks':0:'Normal Font' 'JetBrainsMonoNerdFont-Regular 13'" \
+                "$HOME/Library/Preferences/com.googlecode.iterm2.plist" 2>/dev/null || true
+            /usr/libexec/PlistBuddy -c "Set :'New Bookmarks':0:'Non Ascii Font' 'JetBrainsMonoNerdFont-Regular 13'" \
+                "$HOME/Library/Preferences/com.googlecode.iterm2.plist" 2>/dev/null || true
+            print_success "iTerm2 configured (restart iTerm2 to apply)"
+        fi
+        
+        # Configure Terminal.app
+        print_status "Configuring Terminal.app..."
+        osascript <<'APPLESCRIPT' 2>/dev/null || true
+tell application "Terminal"
+    try
+        set font name of settings set "Basic" to "JetBrainsMonoNerdFont-Regular"
+        set font size of settings set "Basic" to 13
+    end try
+end tell
+APPLESCRIPT
+        print_success "Terminal.app configured (restart Terminal.app to apply)"
+        
+        # Configure Cursor/VSCode terminal via settings.json
+        local CURSOR_SETTINGS="$HOME/Library/Application Support/Cursor/User/settings.json"
+        if [ -f "$CURSOR_SETTINGS" ]; then
+            print_status "Cursor terminal settings already exist - skipping auto-config"
+            print_status "💡 Manually set in Cursor: Terminal › Integrated: Font Family = JetBrainsMono Nerd Font"
+        fi
+    else
+        print_status "Terminal font configuration is only automated for macOS"
+        print_status "💡 Manually set your terminal font to: JetBrainsMono Nerd Font"
+    fi
+}
+
 # Create required directories
 create_directories() {
     print_status "Creating required directories..."
@@ -455,6 +494,9 @@ main() {
     install_nerd_fonts
     echo ""
     
+    configure_terminal_fonts
+    echo ""
+    
     create_directories
     echo ""
     
@@ -467,10 +509,10 @@ main() {
     print_success "🎉 Setup complete!"
     echo ""
     print_status "Next steps:"
-    echo "  1. Open a new terminal or restart your shell"
+    echo "  1. Restart your terminal application (iTerm2/Terminal.app) to see Nerd Fonts"
     echo "  2. If ZSH isn't your default shell yet, log out and log back in"
-    echo "  3. Run 'zsh' to start using your new configuration immediately"
-    echo "  4. Enjoy your modern shell setup with all the tools!"
+    echo "  3. Open a new terminal window to see your beautiful prompt!"
+    echo "  4. Run 'assume <profile>' to test AWS role assumption with Granted"
     echo ""
     print_status "Installed tools:"
     echo "  • ZSH (configured as default shell)"
