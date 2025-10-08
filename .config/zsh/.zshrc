@@ -135,3 +135,5 @@ if [ -d /usr/share/zsh/plugins/zsh-syntax-highlighting ]; then
   # oh-my-posh must init before syntax-highlighting
   source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
+test -e "${ZDOTDIR}/.iterm2_shell_integration.zsh" && source "${ZDOTDIR}/.iterm2_shell_integration.zsh"
+
