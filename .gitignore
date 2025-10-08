@@ -20,6 +20,7 @@
 !.config/zed/keymap.json
 !.config/zed/settings.json
 !.config/zsh/.zshrc
+!.config/zsh/.zshenv
 !.config/zsh/functions.sh
 !.gnupg/gpg-agent.conf
 !.gitignore
@@ -29,3 +30,6 @@
 !Makefile
 !.stow-local-ignore
 !setup.sh
+!test-nerd-fonts.sh
+!backup-current-configs.sh
+!FONT-FIX.md

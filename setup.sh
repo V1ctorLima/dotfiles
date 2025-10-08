@@ -225,6 +225,31 @@ install_modern_tools() {
         print_success "FZF already installed"
     fi
     
+    # Granted (AWS role assumption)
+    if ! command -v granted >/dev/null 2>&1; then
+        print_status "Installing Granted..."
+        case $OS in
+            "macos")
+                brew tap common-fate/granted
+                brew install granted
+                ;;
+            "ubuntu"|"linux")
+                curl -OL https://releases.commonfate.io/granted/v0.20.3/granted_0.20.3_linux_x86_64.tar.gz
+                sudo tar -zxvf ./granted_0.20.3_linux_x86_64.tar.gz -C /usr/local/bin/
+                rm granted_0.20.3_linux_x86_64.tar.gz
+                ;;
+            "arch")
+                yay -S granted
+                ;;
+            *)
+                print_status "Please install Granted manually: https://docs.commonfate.io/granted/getting-started"
+                ;;
+        esac
+        print_success "Granted installed"
+    else
+        print_success "Granted already installed"
+    fi
+    
     # ZSH plugins
     case $OS in
         "ubuntu")
@@ -453,6 +478,7 @@ main() {
     echo "  • Mise (runtime version manager)"
     echo "  • Atuin (shell history)"
     echo "  • FZF (fuzzy finder)"
+    echo "  • Granted (AWS role assumption)"
     echo "  • ZSH plugins (autosuggestions, syntax highlighting)"
     echo ""
     print_status "To remove dotfiles: stow --verbose --target=\"\$HOME\" -D ."

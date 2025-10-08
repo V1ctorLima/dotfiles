@@ -20,6 +20,9 @@ setopt INTERACTIVE_COMMENTS   # allow comments in interactive shell
 stty stop undef
 stty start undef
 
+# granted AWS role assumption (load before compinit for tab completion)
+test -f $HOME/.config/zsh/.zshenv && source $HOME/.config/zsh/.zshenv
+
 # improved completion
 autoload -Uz compinit; compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 zstyle ':completion:*' matcher-list \
@@ -55,7 +58,7 @@ export PROMPT='%n%F{245}@%f%B%M%b%F{245}:%20<..<%3~%<<%f%B%#%b '
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
   # Check if oh-my-posh is available
   if command -v oh-my-posh >/dev/null 2>&1; then
-    # Use Oh My Posh with Catppuccin theme
+    # Use Oh My Posh with Catppuccin theme (Nerd Font version)
     eval "$(oh-my-posh init zsh --config "$HOME/.config/oh-my-posh/chippuccin.toml")" 2>/dev/null || true
   else
     # Fallback to a nice ZSH prompt if oh-my-posh is not available

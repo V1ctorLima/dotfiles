@@ -15,14 +15,15 @@ This project is guided by the following principles:
 ## Features & Highlights
 
 ### 🎨 **Beautiful Shell Experience**
-- **Oh My Posh**: Custom Catppuccin-themed prompt with git integration
-- **Smart Environment Detection**: Automatically switches between Nerd Font and ASCII-safe prompts
-- **Custom Symbols**: `➜` for success, `✗` for errors, `🌱` for git branches
+- **Oh My Posh**: Custom Catppuccin-themed prompt with git integration and Nerd Font icons
+- **Custom Symbols**: `➜` for success, `✗` for errors, beautiful git branch icons
+- **Tab Completion**: Full AWS profile autocompletion with Granted
 
 ### 🚀 **Modern CLI Tools Integration**
 - **[Mise](https://mise.jdx.dev/)**: Runtime version manager (replaces nvm, rbenv, etc.)
 - **[Atuin](https://atuin.sh/)**: Magical shell history with sync and search
 - **[FZF](https://github.com/junegunn/fzf)**: Fuzzy finder for files, history, and commands
+- **[Granted](https://docs.commonfate.io/granted/)**: AWS role assumption made easy
 
 ### ⚡ **Enhanced ZSH Configuration**
 - **Smart History**: Extended history with deduplication and timestamps
@@ -227,15 +228,16 @@ Modern Vim configuration with Docker-friendly mappings:
 | `n` | Next search result |
 | `N` | Previous search result |
 
-### Custom Functions
+### Custom Functions & Aliases
 
-Useful shell functions included:
+Useful shell functions and aliases included:
 
 | Function | Usage | Action |
 | :------- | :---- | :----- |
 | `pingts` | `pingts google.com` | Timestamped ping |
 | `cheat` | `cheat curl` | Quick cheat sheets from cheat.sh |
 | `server` | `server 8080` | Start HTTP server (default port 8000) |
+| `assume` | `assume <profile>` | Assume AWS role with Granted (auto-configured) |
 
 ## Customization
 
@@ -244,9 +246,9 @@ Useful shell functions included:
 Two prompt configurations are available:
 
 - **`chippuccin.toml`**: Full Nerd Font version with icons
-- **`chippuccin-docker.toml`**: ASCII-safe version for Docker/SSH
+- **`chippuccin-ascii.toml`**: ASCII-safe version for Docker/SSH/Cloud terminals
 
-The configuration automatically detects your environment and switches accordingly.
+The configuration automatically detects your environment and switches accordingly. You can also manually force ASCII mode by setting the `OH_MY_POSH_ASCII` environment variable.
 
 ### Platform-Specific Aliases
 
@@ -270,9 +272,37 @@ Aliases are organized by platform:
 ### Common Issues
 
 **Prompt showing weird characters or boxes?**
+
+The fonts are likely installed but your terminal isn't configured correctly. Here's how to fix it:
+
+**For Cursor/VS Code integrated terminal:**
+1. Open Settings (Cmd+,)
+2. Search for "terminal font"
+3. Set `Terminal › Integrated: Font Family` to: `JetBrainsMono Nerd Font`
+4. Close and reopen the terminal
+
+Or add to your `settings.json`:
+```json
+"terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
+"terminal.integrated.fontSize": 13,
+"terminal.integrated.env.osx": {
+    "TERM": "xterm-256color"
+}
+```
+
+**For other terminals:**
+- **iTerm2**: Preferences → Profiles → Text → Font → "JetBrainsMono Nerd Font"
+- **Terminal.app**: Preferences → Profiles → Font → "JetBrainsMono Nerd Font"  
+- **WezTerm/Alacritty/Kitty**: Check their config files
+
+**Font not installed yet?**
 - **Run the setup script**: `./setup.sh` automatically installs JetBrains Mono Nerd Font
-- **Manual install**: Download from [Nerd Fonts](https://www.nerdfonts.com/) 
-- **Configure terminal**: Set font to "JetBrains Mono Nerd Font" and restart terminal
+- **Manual install**: Download from [Nerd Fonts](https://www.nerdfonts.com/)
+
+**Test your setup:**
+```bash
+./test-nerd-fonts.sh
+```
 
 **ZSH not found?**
 - Install ZSH: `brew install zsh` (macOS) or `sudo apt install zsh` (Linux)
