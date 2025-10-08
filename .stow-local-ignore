@@ -1,0 +1,13 @@
+# Stow ignore file - files/directories to ignore during stow operations
+# This prevents Docker testing files from being linked to home directory
+
+Dockerfile
+docker-compose.yml
+Makefile
+test-dotfiles.sh
+README-Docker-Testing.md
+\.git
+\.gitignore
+LICENSE
+README\.md
+

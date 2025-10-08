@@ -1,0 +1,26 @@
+services:
+  dotfiles-test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dotfiles-test
+    volumes:
+      # Mount the current directory to allow live editing during development
+      - .:/home/testuser/dotfiles
+    environment:
+      - TERM=xterm-256color
+    stdin_open: true
+    tty: true
+    command: /bin/zsh
+
+  # Alternative service for running automated tests
+  dotfiles-test-auto:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dotfiles-test-auto
+    volumes:
+      - .:/home/testuser/dotfiles
+    environment:
+      - TERM=xterm-256color
+    command: ./test-dotfiles.sh

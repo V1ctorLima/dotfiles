@@ -1,0 +1,37 @@
+# git configuration
+
+# allowlist: everything is ignored except the files listed below
+*
+
+!.config/aerospace/aerospace.toml
+!.config/aliases.bsd.sh
+!.config/aliases.linux.sh
+!.config/aliases.unix.sh
+!.config/aliases.windows.sh
+!.config/bash/bashrc
+!.config/git/config
+!.config/inputrc
+!.config/oh-my-posh/chippuccin.toml
+!.config/oh-my-posh/chippuccin-docker.toml
+!.config/oh-my-posh/README.md
+!.config/termux/termux.properties
+!.config/tmux/tmux.conf
+!.config/vim/vimrc
+!.config/vim/colors/catppuccin_mocha.vim
+!.config/zed/keymap.json
+!.config/zed/settings.json
+!.config/zsh/.zshrc
+!.config/zsh/functions.sh
+!.gnupg/gpg-agent.conf
+!.gitignore
+!.zshenv
+!LICENSE
+!README.md
+!Dockerfile
+!docker-compose.yml
+!test-dotfiles.sh
+!Makefile
+!README-Docker-Testing.md
+!.stow-local-ignore
+!interactive-welcome.sh
+!setup.sh
