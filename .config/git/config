@@ -1,4 +1,7 @@
 # git configuration
+# Note: Use HTTPS for personal repos to avoid SSH key conflicts
+# Do NOT add: url.git@github.com:.insteadof https://github.com/
+# This causes issues with multiple GitHub accounts
 
 [user]
   name = Victor Lima
