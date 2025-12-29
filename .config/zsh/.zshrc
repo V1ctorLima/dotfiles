@@ -137,3 +137,17 @@ if [ -d /usr/share/zsh/plugins/zsh-syntax-highlighting ]; then
 fi
 test -e "${ZDOTDIR}/.iterm2_shell_integration.zsh" && source "${ZDOTDIR}/.iterm2_shell_integration.zsh"
 
+export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
+
+# Force English language for PostgreSQL and other tools
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/sbin:$PATH"
+
+alias c='claude'
+alias ch='claude --chrome'
+alias gb='github'
+alias co='code'
+alias q='cd ~/Documents/projects'
