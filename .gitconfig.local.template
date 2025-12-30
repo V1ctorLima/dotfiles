@@ -1,0 +1,15 @@
+# Machine-specific git configuration template
+# Copy this to ~/.gitconfig.local to override default settings
+# This file is NOT synced via dotfiles
+
+# Example: Override GPG program path if needed
+# [gpg]
+#   program = /usr/local/bin/gpg
+
+# Example: Use different email for work machine
+# [user]
+#   email = victor.lima@company.com
+
+# Example: Machine-specific aliases
+# [alias]
+#   work = "!cd ~/Work/projects"

@@ -24,17 +24,28 @@ This project is guided by the following principles:
 - **[Atuin](https://atuin.sh/)**: Magical shell history with sync and search
 - **[FZF](https://github.com/junegunn/fzf)**: Fuzzy finder for files, history, and commands
 - **[Granted](https://docs.commonfate.io/granted/)**: AWS role assumption made easy
+- **[Claude Code](https://claude.ai/claude-code)**: Custom status line with git integration and context tracking
 
 ### ⚡ **Enhanced ZSH Configuration**
 - **Smart History**: Extended history with deduplication and timestamps
 - **Intelligent Completion**: Case-insensitive matching with menu selection
 - **Auto-suggestions**: Fish-like autosuggestions with syntax highlighting
 - **Directory Navigation**: Auto-cd and smart path completion
+- **Python 3 Compatible**: All shell functions updated to Python 3
 
 ### 🛠️ **Development Tools**
 - **Git**: Comprehensive configuration with GPG signing and Delta integration
+- **Git Machine Override**: Support for per-machine git config via `.gitconfig.local`
 - **Vim**: Modern configuration with Catppuccin theme and Docker-friendly key mappings
 - **Aliases**: Platform-specific aliases for macOS, Linux, BSD, and Windows
+- **EditorConfig**: Consistent coding styles across different editors
+
+### 🔧 **Configuration Management**
+
+- **Portable Paths**: Conditional PATH exports for optional tools
+- **XDG Compliance**: Full XDG Base Directory specification support
+- **Machine-Specific Overrides**: Separate configs for personal vs machine-specific settings
+- **Privacy-Conscious**: Template system for sensitive configuration
 
 ### 🐳 **Docker Testing Environment**
 - **Isolated Testing**: Test dotfiles in clean Ubuntu containers
@@ -130,10 +141,62 @@ dotfiles/
 │   ├── git/           # Git configuration with GPG and Delta
 │   ├── oh-my-posh/    # Custom prompt themes
 │   └── aliases.*      # Platform-specific aliases
-├── .zshenv            # ZSH environment variables
+├── .claude/           # Claude Code configuration
+│   ├── settings.json  # Model, status line, and plugins config
+│   └── scripts/       # Custom status bar scripts
+├── .zshenv            # ZSH environment variables (XDG compliance)
+├── .editorconfig      # Consistent coding styles across editors
+├── .gitconfig.local.template  # Template for machine-specific git config
 ├── setup.sh           # Automated setup script
 └── Dockerfile         # Docker testing environment
 ```
+
+## Machine-Specific Configuration
+
+These dotfiles are designed to work across multiple machines while allowing customization per machine.
+
+### Git Configuration Override
+
+The default git configuration (name, email, GPG key) is shared across all machines. To override on a specific machine:
+
+```sh
+# Copy the template
+cp ~/.dotfiles/.gitconfig.local.template ~/.gitconfig.local
+
+# Edit with your machine-specific settings
+vim ~/.gitconfig.local
+```
+
+Example `~/.gitconfig.local`:
+
+```gitconfig
+[user]
+  email = work@company.com  # Override email for work laptop
+
+[gpg]
+  program = /opt/homebrew/bin/gpg  # Override GPG path if needed
+```
+
+### Machine-Specific Aliases
+
+Add machine-specific aliases to `~/.config/zsh/private.sh`:
+
+```bash
+# This file is NOT tracked in git
+# Add machine-specific aliases, functions, and secrets here
+
+alias work='cd ~/Work/important-project'
+export CUSTOM_API_KEY="your-secret-key"
+```
+
+### Optional Tool Paths
+
+The configuration automatically detects and adds optional tools to PATH:
+
+- PostgreSQL (`/opt/homebrew/opt/postgresql@17/bin`)
+- MySQL Client (`/opt/homebrew/opt/mysql-client/bin`)
+
+Only added if the directories exist, ensuring portability across machines.
 
 ## Shortcuts & Keybindings
 
@@ -236,10 +299,35 @@ Useful shell functions and aliases included:
 | :------- | :---- | :----- |
 | `pingts` | `pingts google.com` | Timestamped ping |
 | `cheat` | `cheat curl` | Quick cheat sheets from cheat.sh |
-| `server` | `server 8080` | Start HTTP server (default port 8000) |
+| `server` | `server 8080` | Start Python 3 HTTP server (default port 8000) |
 | `assume` | `assume <profile>` | Assume AWS role with Granted (auto-configured) |
 
+### Personal Aliases
+
+Shared across all machines (defined in `.zshrc`):
+
+| Alias | Action |
+| :---- | :----- |
+| `c` | Launch Claude Code CLI |
+| `ch` | Launch Claude Code with Chrome browser |
+| `gb` | Launch GitHub CLI |
+| `co` | Launch VS Code |
+| `q` | Quick navigate to projects directory |
+
 ## Customization
+
+### Claude Code Configuration
+
+Custom status line configuration with:
+
+- Real-time git branch and sync status
+- Uncommitted file counter
+- Context window usage tracking
+- Color-coded progress bars
+- Last user message display
+
+Configuration: `~/.claude/settings.json`
+Custom script: `~/.claude/scripts/context-bar.sh`
 
 ### Oh My Posh Theme
 
@@ -256,9 +344,8 @@ The custom **Catppuccin** themed prompt configuration with Nerd Font support:
 Aliases are organized by platform:
 
 - **`aliases.unix.sh`**: Universal Unix aliases
-- **`aliases.linux.sh`**: Linux-specific aliases  
-- **`aliases.mac.sh`**: macOS-specific aliases
-- **`aliases.bsd.sh`**: BSD-specific aliases
+- **`aliases.linux.sh`**: Linux-specific aliases
+- **`aliases.bsd.sh`**: BSD/macOS-specific aliases (Python 3 compatible)
 - **`aliases.windows.sh`**: Windows/WSL aliases
 
 ### Adding Custom Configurations

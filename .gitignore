@@ -22,6 +22,11 @@
 !.config/zsh/.zshrc
 !.config/zsh/.zshenv
 !.config/zsh/functions.sh
+!.claude/
+!.claude/.gitignore
+!.claude/settings.json
+!.claude/scripts/
+!.claude/scripts/context-bar.sh
 !.gnupg/gpg-agent.conf
 !.gitignore
 !.zshenv
@@ -29,6 +34,8 @@
 !README.md
 !Makefile
 !.stow-local-ignore
+!.gitconfig.local.template
+!.editorconfig
 !setup.sh
 !test-nerd-fonts.sh
 !backup-current-configs.sh

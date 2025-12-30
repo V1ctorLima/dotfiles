@@ -1,0 +1,22 @@
+# Ignore all files by default in .claude directory
+*
+
+# Only allow specific safe files
+!.gitignore
+!settings.json
+!scripts/
+!scripts/context-bar.sh
+
+# Never commit these (extra safety)
+settings.local.json
+history.jsonl
+stats-cache.json
+session-env/
+debug/
+file-history/
+todos/
+projects/
+plugins/
+downloads/
+plans/
+ide/

@@ -3,13 +3,20 @@
 # Do NOT add: url.git@github.com:.insteadof https://github.com/
 # This causes issues with multiple GitHub accounts
 
+# Default user config (shared across all machines)
+# Override these in ~/.gitconfig.local if needed per machine
 [user]
   name = Victor Lima
   email = me@vlima.in
   signingkey = 83A35527AE43FBB7
 
 [gpg]
-  program = /usr/local/bin/gpg
+  program = gpg  # Use system PATH
+
+# Include machine-specific overrides (optional)
+# Create ~/.gitconfig.local to override any settings above
+[include]
+  path = ~/.gitconfig.local
 
 [core]
   editor = vim
