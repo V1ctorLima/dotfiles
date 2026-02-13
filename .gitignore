@@ -19,6 +19,8 @@
 !.config/vim/colors/catppuccin_mocha.vim
 !.config/zed/keymap.json
 !.config/zed/settings.json
+!.config/ccstatusline/
+!.config/ccstatusline/settings.json
 !.config/zsh/.zshrc
 !.config/zsh/.zshenv
 !.config/zsh/functions.sh

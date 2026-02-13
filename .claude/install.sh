@@ -8,6 +8,7 @@ DOTFILES_CLAUDE="$HOME/dotfiles/.claude"
 CLAUDE_DIR="$HOME/.claude"
 
 echo "🎨 Setting up Claude Code visual configuration..."
+echo ""
 
 # Create ~/.claude directory if it doesn't exist
 mkdir -p "$CLAUDE_DIR"
@@ -31,15 +32,16 @@ create_symlink() {
     fi
 }
 
-# Symlink settings.json
+# 1. Symlink Claude settings.json
+echo "1️⃣  Claude Settings:"
 create_symlink "$DOTFILES_CLAUDE/settings.json" "$CLAUDE_DIR/settings.json"
 
-# Symlink keybindings.json if it exists in dotfiles
+# 2. Symlink keybindings.json if it exists in dotfiles
 if [ -f "$DOTFILES_CLAUDE/keybindings.json" ]; then
     create_symlink "$DOTFILES_CLAUDE/keybindings.json" "$CLAUDE_DIR/keybindings.json"
 fi
 
-# Create settings.local.json if it doesn't exist
+# 3. Create settings.local.json if it doesn't exist
 if [ ! -f "$CLAUDE_DIR/settings.local.json" ]; then
     echo '{}' > "$CLAUDE_DIR/settings.local.json"
     echo "  ✓ settings.local.json created (for machine-specific overrides)"
@@ -48,13 +50,26 @@ else
 fi
 
 echo ""
+
+# 4. Setup ccstatusline visual configuration
+echo "2️⃣  Status Line Visual Config:"
+if [ -f "$HOME/dotfiles/.config/ccstatusline/settings.json" ]; then
+    mkdir -p "$HOME/.config/ccstatusline"
+    create_symlink "$HOME/dotfiles/.config/ccstatusline/settings.json" "$HOME/.config/ccstatusline/settings.json"
+else
+    echo "  ⊘ No ccstatusline config in dotfiles"
+fi
+
+echo ""
 echo "✅ Claude Code configuration installed!"
 echo ""
-echo "📝 Notes:"
-echo "  - Use settings.json for synced configuration"
-echo "  - Use settings.local.json for machine-specific settings"
-echo "  - Status line: $DOTFILES_CLAUDE/settings.json"
+echo "📝 What's synced:"
+echo "  ✓ Claude settings.json       → Permissions, plugins, status line command"
+echo "  ✓ ccstatusline settings.json → Visual appearance (colors, layout, theme)"
 echo ""
-echo "🔄 To sync changes across machines:"
+echo "💡 Machine-specific:"
+echo "  • settings.local.json → Local overrides (not synced)"
+echo ""
+echo "🔄 To sync changes from other machines:"
 echo "  cd ~/dotfiles && git pull"
 echo ""

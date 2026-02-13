@@ -10,6 +10,7 @@
 !scripts/
 
 # Never commit these (extra safety)
+.mcp.json
 settings.local.json
 history.jsonl
 stats-cache.json
@@ -22,3 +23,4 @@ plugins/
 downloads/
 plans/
 ide/
+.credentials.json
