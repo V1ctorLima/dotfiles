@@ -327,7 +327,6 @@ Custom status line configuration with:
 - Last user message display
 
 Configuration: `~/.claude/settings.json`
-Custom script: `~/.claude/scripts/context-bar.sh`
 
 ### Oh My Posh Theme
 

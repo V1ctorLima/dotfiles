@@ -26,7 +26,6 @@
 !.claude/.gitignore
 !.claude/settings.json
 !.claude/scripts/
-!.claude/scripts/context-bar.sh
 !.gnupg/gpg-agent.conf
 !.gitignore
 !.zshenv

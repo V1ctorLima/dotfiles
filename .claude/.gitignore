@@ -4,8 +4,10 @@
 # Only allow specific safe files
 !.gitignore
 !settings.json
+!keybindings.json
+!install.sh
+!README.md
 !scripts/
-!scripts/context-bar.sh
 
 # Never commit these (extra safety)
 settings.local.json

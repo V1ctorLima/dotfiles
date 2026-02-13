@@ -1,10 +1,68 @@
 {
-  "model": "sonnet[1m]",
+  "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "Bash(rg:*)",
+      "Bash(echo:*)",
+      "Bash(grep:*)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(sed:*)",
+      "Bash(source:*)",
+      "Bash(tree:*)",
+      "Bash(gh pr list:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh pr diff:*)",
+      "Bash(gh api user:*)",
+      "Bash(gh repo view:*)",
+      "Bash(gh issue view:*)",
+      "Bash(git branch --show-current:*)",
+      "Bash(git diff:*)",
+      "Bash(git status:*)",
+      "Bash(git rev-parse:*)",
+      "Bash(git push:*)",
+      "Bash(git log:*)",
+      "Bash(git -C :* branch --show-current:*)",
+      "Bash(git -C :* diff:*)",
+      "Bash(git -C :* status:*)",
+      "Bash(git -C :* rev-parse:*)",
+      "Bash(git -C :* push:*)",
+      "Bash(git -C :* log:*)",
+      "Bash(git fetch --prune:*)",
+      "Bash(git worktree list:*)",
+      "Bash(python --version:*)",
+      "WebFetch(domain:docs.litellm.ai)",
+      "WebFetch(domain:openai.com)",
+      "WebFetch(domain:anthropic.com)",
+      "WebFetch(domain:docs.anthropic.com)",
+      "WebFetch(domain:github.com)",
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__get-library-docs",
+      "mcp__github__get_me",
+      "mcp__github__pull_request_read",
+      "mcp__github__get_file_contents",
+      "mcp__github__get_workflow_run",
+      "mcp__github__get_job_logs",
+      "mcp__github__get_pull_request_comments",
+      "mcp__github__get_pull_request_reviews",
+      "mcp__github__issue_read",
+      "mcp__github__list_pull_requests",
+      "mcp__github__list_commits",
+      "mcp__github__list_workflows",
+      "mcp__github__list_workflow_runs",
+      "mcp__github__list_workflow_jobs",
+      "mcp__github__search_pull_requests",
+      "mcp__github__search_issues",
+      "mcp__github__search_code"
+    ]
+  },
   "statusLine": {
     "type": "command",
-    "command": "~/.claude/scripts/context-bar.sh"
+    "command": "npx -y ccstatusline@latest",
+    "padding": 0
   },
   "enabledPlugins": {
-    "dx@ykdojo": true
+    "frontend-design@claude-plugins-official": true,
+    "review-confluence-page@sec-claude-code-configuration": true
   }
 }
