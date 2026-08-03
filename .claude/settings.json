@@ -421,12 +421,6 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/vlima/.claude/hooks/PromptProcessing.hook.ts",
-            "timeout": 15,
-            "async": true
-          },
-          {
-            "type": "command",
             "command": "$HOME/.claude/hooks/PromptProcessing.hook.ts",
             "timeout": 30,
             "async": true
@@ -455,16 +449,6 @@
           {
             "type": "command",
             "command": "$HOME/.claude/hooks/AlgorithmNudge.hook.ts"
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/vlima/.claude/hooks/SatisfactionCapture.hook.ts",
-            "timeout": 20,
-            "async": true
           }
         ]
       }
